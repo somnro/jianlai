@@ -1,13 +1,15 @@
-FROM alpine/git as clone
-WORKDIR /app
-RUN git clone https://github.com/somnro/jianlai.git
+FROM maven:3.6-adoptopenjdk-8 as BUILD
+WORKDIR /opt/tmp
+COPY pom.xml pom.xml
+RUN mvn dependency:go-offline -B
+WORKDIR /opt/app
+COPY pom.xml pom.xml
+COPY src /opt/app/src
+RUN mvn clean package -Dmaven.test.skip=true
 
-FROM maven:3.5-jdk-8-alpine as build
-WORKDIR /app
-COPY --from=clone /app/jianlai  /app
-RUN mvn install
-
-FROM openjdk:8-jre-alpine
-WORKDIR /app
-COPY --from=build /app/target/jianlai.jar /app
+FROM  openjdk:8-jdk
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo 'Asia/Shanghai' >/etc/timezone
+COPY --from=BUILD /opt/app/target/*.jar /opt/app/app.jar
+WORKDIR /opt/app
 CMD ["java -jar jianlai.jar"]
