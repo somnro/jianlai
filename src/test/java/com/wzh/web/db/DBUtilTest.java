@@ -1,8 +1,6 @@
-package com.wenzhiheng.jianlai.db;
+package com.wzh.web.db;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Author: wzh

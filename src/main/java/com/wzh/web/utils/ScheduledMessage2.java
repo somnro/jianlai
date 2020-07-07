@@ -1,20 +1,15 @@
-package com.wenzhiheng.jianlai.utils;
+package com.wzh.web.utils;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.wenzhiheng.jianlai.constant.Constant;
-import com.wenzhiheng.jianlai.db.DBUtil;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+import com.wzh.web.constant.Constant;
+import com.wzh.web.db.DBUtil;
 import org.seimicrawler.xpath.JXDocument;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * @Author: wzh

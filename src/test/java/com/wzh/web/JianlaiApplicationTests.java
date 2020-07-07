@@ -1,4 +1,4 @@
-package com.wenzhiheng.jianlai;
+package com.wzh.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

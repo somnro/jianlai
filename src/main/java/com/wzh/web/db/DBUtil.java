@@ -1,11 +1,9 @@
-package com.wenzhiheng.jianlai.db;
+package com.wzh.web.db;
 
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
-import cn.hutool.db.ds.DSFactory;
-import com.wenzhiheng.jianlai.constant.Constant;
+import com.wzh.web.constant.Constant;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**

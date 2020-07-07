@@ -1,4 +1,4 @@
-package com.wenzhiheng.jianlai.constant;
+package com.wzh.web.constant;
 
 /**
  * @Author: wzh
