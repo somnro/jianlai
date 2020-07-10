@@ -1,0 +1,27 @@
+CREATE TABLE `NewTable` (
+`id`  int(11) NOT NULL AUTO_INCREMENT COMMENT '数据ID' ,
+`code`  int(11) NOT NULL COMMENT '基金代码' ,
+`jc`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '基金简称' ,
+`jzrq`  date NOT NULL COMMENT '日期' ,
+`dwjz`  int(11) NULL DEFAULT NULL COMMENT '单位净值' ,
+`ljjz`  int(11) NULL DEFAULT NULL COMMENT '累计净值' ,
+`rzdf`  int(11) NULL DEFAULT NULL COMMENT '日增长率' ,
+`zzf`  int(11) NULL DEFAULT NULL COMMENT '近1周' ,
+`1yzf`  int(11) NULL DEFAULT NULL COMMENT '近1月' ,
+`3yzf`  int(11) NULL DEFAULT NULL COMMENT '近3月' ,
+`6yzf`  int(11) NULL DEFAULT NULL COMMENT '近6月' ,
+`1nzf`  int(11) NULL DEFAULT NULL COMMENT '近1年' ,
+`2nzf`  int(11) NULL DEFAULT NULL COMMENT '近2年' ,
+`3nzf`  int(11) NULL DEFAULT NULL COMMENT '近3年' ,
+`jnzf`  int(11) NULL DEFAULT NULL COMMENT '今年来' ,
+`lnzf`  int(11) NULL DEFAULT NULL COMMENT '成立来' ,
+`qjzf`  int(11) NULL DEFAULT NULL COMMENT '自定义' ,
+`sxf`  int(11) NULL DEFAULT NULL COMMENT '手续费' ,
+`md`  int(11) NULL DEFAULT 0 COMMENT '可购' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1
+ROW_FORMAT=DYNAMIC
+;
