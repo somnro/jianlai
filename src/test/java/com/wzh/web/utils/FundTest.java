@@ -150,7 +150,62 @@ public class FundTest {
      * sun.desktop:windows
      * sun.cpu.isalist:amd64
      *
-     * Process finished with exit code 0
+     * ————————Mac————————
+     * gopherProxySet:false
+     * awt.toolkit:sun.lwawt.macosx.LWCToolkit
+     * java.specification.version:11
+     * sun.cpu.isalist:
+     * sun.jnu.encoding:UTF-8
+     * java.class.path:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar:/Applications/IntelliJ IDEA.app/Contents/plugins/junit/lib/junit5-rt.jar:/Applications/IntelliJ IDEA.app/Contents/plugins/junit/lib/junit-rt.jar:/Users/somnr/IdeaProjects/git/jianlai/target/test-classes:/Users/somnr/IdeaProjects/git/jianlai/target/classes:/Users/somnr/Desktop/develop/install/repository/org/springframework/boot/spring-boot-starter-web/2.3.0.RELEASE/spring-boot-starter-web-2.3.0.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/boot/spring-boot-starter/2.3.0.RELEASE/spring-boot-starter-2.3.0.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/boot/spring-boot/2.3.0.RELEASE/spring-boot-2.3.0.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/boot/spring-boot-autoconfigure/2.3.0.RELEASE/spring-boot-autoconfigure-2.3.0.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/boot/spring-boot-starter-logging/2.3.0.RELEASE/spring-boot-starter-logging-2.3.0.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar:/Users/somnr/Desktop/develop/install/repository/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar:/Users/somnr/Desktop/develop/install/repository/org/apache/logging/log4j/log4j-to-slf4j/2.13.2/log4j-to-slf4j-2.13.2.jar:/Users/somnr/Desktop/develop/install/repository/org/apache/logging/log4j/log4j-api/2.13.2/log4j-api-2.13.2.jar:/Users/somnr/Desktop/develop/install/repository/org/slf4j/jul-to-slf4j/1.7.30/jul-to-slf4j-1.7.30.jar:/Users/somnr/Desktop/develop/install/repository/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar:/Users/somnr/Desktop/develop/install/repository/org/yaml/snakeyaml/1.26/snakeyaml-1.26.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/boot/spring-boot-starter-json/2.3.0.RELEASE/spring-boot-starter-json-2.3.0.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/com/fasterxml/jackson/core/jackson-databind/2.11.0/jackson-databind-2.11.0.jar:/Users/somnr/Desktop/develop/install/repository/com/fasterxml/jackson/core/jackson-annotations/2.11.0/jackson-annotations-2.11.0.jar:/Users/somnr/Desktop/develop/install/repository/com/fasterxml/jackson/core/jackson-core/2.11.0/jackson-core-2.11.0.jar:/Users/somnr/Desktop/develop/install/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.11.0/jackson-datatype-jdk8-2.11.0.jar:/Users/somnr/Desktop/develop/install/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.11.0/jackson-datatype-jsr310-2.11.0.jar:/Users/somnr/Desktop/develop/install/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.11.0/jackson-module-parameter-names-2.11.0.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/boot/spring-boot-starter-tomcat/2.3.0.RELEASE/spring-boot-starter-tomcat-2.3.0.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/apache/tomcat/embed/tomcat-embed-core/9.0.35/tomcat-embed-core-9.0.35.jar:/Users/somnr/Desktop/develop/install/repository/org/glassfish/jakarta.el/3.0.3/jakarta.el-3.0.3.jar:/Users/somnr/Desktop/develop/install/repository/org/apache/tomcat/embed/tomcat-embed-websocket/9.0.35/tomcat-embed-websocket-9.0.35.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/spring-web/5.2.6.RELEASE/spring-web-5.2.6.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/spring-beans/5.2.6.RELEASE/spring-beans-5.2.6.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/spring-webmvc/5.2.6.RELEASE/spring-webmvc-5.2.6.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/spring-aop/5.2.6.RELEASE/spring-aop-5.2.6.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/spring-context/5.2.6.RELEASE/spring-context-5.2.6.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/spring-expression/5.2.6.RELEASE/spring-expression-5.2.6.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/projectlombok/lombok/1.18.12/lombok-1.18.12.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/boot/spring-boot-starter-test/2.3.0.RELEASE/spring-boot-starter-test-2.3.0.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/boot/spring-boot-test/2.3.0.RELEASE/spring-boot-test-2.3.0.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/boot/spring-boot-test-autoconfigure/2.3.0.RELEASE/spring-boot-test-autoconfigure-2.3.0.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/com/jayway/jsonpath/json-path/2.4.0/json-path-2.4.0.jar:/Users/somnr/Desktop/develop/install/repository/net/minidev/json-smart/2.3/json-smart-2.3.jar:/Users/somnr/Desktop/develop/install/repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2.jar:/Users/somnr/Desktop/develop/install/repository/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar:/Users/somnr/Desktop/develop/install/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.3/jakarta.xml.bind-api-2.3.3.jar:/Users/somnr/Desktop/develop/install/repository/jakarta/activation/jakarta.activation-api/1.2.2/jakarta.activation-api-1.2.2.jar:/Users/somnr/Desktop/develop/install/repository/org/assertj/assertj-core/3.16.1/assertj-core-3.16.1.jar:/Users/somnr/Desktop/develop/install/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/somnr/Desktop/develop/install/repository/org/junit/jupiter/junit-jupiter/5.6.2/junit-jupiter-5.6.2.jar:/Users/somnr/Desktop/develop/install/repository/org/junit/jupiter/junit-jupiter-api/5.6.2/junit-jupiter-api-5.6.2.jar:/Users/somnr/Desktop/develop/install/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/Users/somnr/Desktop/develop/install/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/somnr/Desktop/develop/install/repository/org/junit/platform/junit-platform-commons/1.6.2/junit-platform-commons-1.6.2.jar:/Users/somnr/Desktop/develop/install/repository/org/junit/jupiter/junit-jupiter-params/5.6.2/junit-jupiter-params-5.6.2.jar:/Users/somnr/Desktop/develop/install/repository/org/junit/jupiter/junit-jupiter-engine/5.6.2/junit-jupiter-engine-5.6.2.jar:/Users/somnr/Desktop/develop/install/repository/org/junit/platform/junit-platform-engine/1.6.2/junit-platform-engine-1.6.2.jar:/Users/somnr/Desktop/develop/install/repository/org/mockito/mockito-core/3.3.3/mockito-core-3.3.3.jar:/Users/somnr/Desktop/develop/install/repository/net/bytebuddy/byte-buddy/1.10.10/byte-buddy-1.10.10.jar:/Users/somnr/Desktop/develop/install/repository/net/bytebuddy/byte-buddy-agent/1.10.10/byte-buddy-agent-1.10.10.jar:/Users/somnr/Desktop/develop/install/repository/org/objenesis/objenesis/2.6/objenesis-2.6.jar:/Users/somnr/Desktop/develop/install/repository/org/mockito/mockito-junit-jupiter/3.3.3/mockito-junit-jupiter-3.3.3.jar:/Users/somnr/Desktop/develop/install/repository/org/skyscreamer/jsonassert/1.5.0/jsonassert-1.5.0.jar:/Users/somnr/Desktop/develop/install/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/spring-core/5.2.6.RELEASE/spring-core-5.2.6.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/spring-jcl/5.2.6.RELEASE/spring-jcl-5.2.6.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/springframework/spring-test/5.2.6.RELEASE/spring-test-5.2.6.RELEASE.jar:/Users/somnr/Desktop/develop/install/repository/org/xmlunit/xmlunit-core/2.7.0/xmlunit-core-2.7.0.jar:/Users/somnr/Desktop/develop/install/repository/cn/wanghaomiao/JsoupXpath/2.2/JsoupXpath-2.2.jar:/Users/somnr/Desktop/develop/install/repository/org/jsoup/jsoup/1.10.3/jsoup-1.10.3.jar:/Users/somnr/Desktop/develop/install/repository/org/apache/commons/commons-lang3/3.10/commons-lang3-3.10.jar:/Users/somnr/Desktop/develop/install/repository/org/antlr/antlr4-runtime/4.7/antlr4-runtime-4.7.jar:/Users/somnr/Desktop/develop/install/repository/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar:/Users/somnr/Desktop/develop/install/repository/cn/hutool/hutool-all/5.2.1/hutool-all-5.2.1.jar:/Users/somnr/Desktop/develop/install/repository/mysql/mysql-connector-java/5.1.48/mysql-connector-java-5.1.48.jar:/Users/somnr/Desktop/develop/install/repository/junit/junit/4.13/junit-4.13.jar:/Users/somnr/Desktop/develop/install/repository/org/hamcrest/hamcrest-core/2.2/hamcrest-core-2.2.jar
+     * java.vm.vendor:Amazon.com Inc.
+     * sun.arch.data.model:64
+     * idea.test.cyclic.buffer.size:1048576
+     * java.vendor.url:https://aws.amazon.com/corretto/
+     * user.timezone:
+     * os.name:Mac OS X
+     * java.vm.specification.version:11
+     * sun.java.launcher:SUN_STANDARD
+     * user.country:CN
+     * sun.boot.library.path:/Users/somnr/Library/Java/JavaVirtualMachines/corretto-11.0.7/Contents/Home/lib
+     * sun.java.command:com.intellij.rt.junit.JUnitStarter -ideVersion5 -junit4 com.wzh.web.utils.FundTest,test0951
+     * jdk.debug:release
+     * sun.cpu.endian:little
+     * user.home:/Users/somnr
+     * user.language:zh
+     * java.specification.vendor:Oracle Corporation
+     * java.version.date:2020-04-14
+     * java.home:/Users/somnr/Library/Java/JavaVirtualMachines/corretto-11.0.7/Contents/Home
+     * file.separator:/
+     * java.vm.compressedOopsMode:Zero based
+     * line.separator:
+     *
+     * java.specification.name:Java Platform API Specification
+     * java.vm.specification.vendor:Oracle Corporation
+     * java.awt.graphicsenv:sun.awt.CGraphicsEnvironment
+     * user.script:Hans
+     * sun.management.compiler:HotSpot 64-Bit Tiered Compilers
+     * java.runtime.version:11.0.7+10-LTS
+     * user.name:somnr
+     * path.separator::
+     * os.version:10.15.2
+     * java.runtime.name:OpenJDK Runtime Environment
+     * file.encoding:UTF-8
+     * java.vm.name:OpenJDK 64-Bit Server VM
+     * java.vendor.version:Corretto-11.0.7.10.1
+     * java.vendor.url.bug:https://github.com/corretto/corretto-11/issues/
+     * java.io.tmpdir:/var/folders/2x/459dczss42ngd98lyj14_ctr0000gn/T/
+     * java.version:11.0.7
+     * user.dir:/Users/somnr/IdeaProjects/git/jianlai
+     * os.arch:x86_64
+     * java.vm.specification.name:Java Virtual Machine Specification
+     * java.awt.printerjob:sun.lwawt.macosx.CPrinterJob
+     * sun.os.patch.level:unknown
+     * java.library.path:/Users/somnr/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+     * java.vendor:Amazon.com Inc.
+     * java.vm.info:mixed mode
+     * java.vm.version:11.0.7+10-LTS
+     * sun.io.unicode.encoding:UnicodeBig
+     * java.class.version:55.0
      */
     @Test
     public void test0951() {
