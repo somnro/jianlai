@@ -8,15 +8,16 @@ import com.wzh.web.db.DBUtil;
 import com.wzh.web.po.Fund;
 import org.jsoup.nodes.Node;
 import org.junit.Test;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.seimicrawler.xpath.JXDocument;
 import org.seimicrawler.xpath.JXNode;
 
 import java.nio.charset.Charset;
 import java.sql.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author: wzh
@@ -227,5 +228,29 @@ public class FundTest {
             e.printStackTrace();
         }
         return 0d;
+    }
+
+    @Test
+    public void test1009(){
+        ChromeDriver driver = initDriverMac();
+        driver.get("http://www.2345.com");
+        new WebDriverWait(driver,1000*3);
+        System.out.println("1 = " + 1);
+
+    }
+
+
+    public static ChromeDriver initDriverMac(){
+        ChromeOptions chromeOptions = new ChromeOptions();
+        //设置代理,请先验证代理是否有效
+        //去掉提示
+        chromeOptions.setExperimentalOption("useAutomationExtension", false);
+        chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+        //设置驱动路径
+        System.setProperty("webdriver.chrome.driver", "/Users/somnr/Desktop/develop/chromeDriver/chromedriver");
+        //取消信息显示：[1589963848.022][SEVERE]: Timed out receiving message from renderer: 0.100
+        System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+        ChromeDriver driver = new ChromeDriver(chromeOptions);
+        return driver;
     }
 }
