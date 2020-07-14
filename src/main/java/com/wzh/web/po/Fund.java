@@ -8,39 +8,50 @@ import java.sql.Date;
  **/
 public class Fund {
 
-    private long id;
-    private long code;
+    private Long id;
+    private Long code;
     private String jc;
     private java.sql.Date jzrq;
-    private long dwjz;
-    private long ljjz;
-    private long rzdf;
-    private long zzf;
-    private long Yzf1;
-    private long Yzf3;
-    private long Yzf6;
-    private long Nzf1;
-    private long Nzf2;
-    private long Nzf3;
-    private long jnzf;
-    private long lnzf;
-    private long qjzf;
-    private long sxf;
-    private long md;
+    private Double dwjz;
+    private Double ljjz;
+    private Double rzdf;
+    private Double zzf;
+    private Double Yzf1;
+    private Double Yzf3;
+    private Double Yzf6;
+    private Double Nzf1;
+    private Double Nzf2;
+    private Double Nzf3;
+    private Double jnzf;
+    private Double lnzf;
+    private Double qjzf;
+    private Double sxf;
+    private Long md;
+    //全称
+    private String qc;
+    private Date create;
 
-    public long getId() {
+    public Date getCreate() {
+        return create;
+    }
+
+    public void setCreate(Date create) {
+        this.create = create;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(long code) {
+    public void setCode(Long code) {
         this.code = code;
     }
 
@@ -60,123 +71,131 @@ public class Fund {
         this.jzrq = jzrq;
     }
 
-    public long getDwjz() {
+    public Double getDwjz() {
         return dwjz;
     }
 
-    public void setDwjz(long dwjz) {
+    public void setDwjz(Double dwjz) {
         this.dwjz = dwjz;
     }
 
-    public long getLjjz() {
+    public Double getLjjz() {
         return ljjz;
     }
 
-    public void setLjjz(long ljjz) {
+    public void setLjjz(Double ljjz) {
         this.ljjz = ljjz;
     }
 
-    public long getRzdf() {
+    public Double getRzdf() {
         return rzdf;
     }
 
-    public void setRzdf(long rzdf) {
+    public void setRzdf(Double rzdf) {
         this.rzdf = rzdf;
     }
 
-    public long getZzf() {
+    public Double getZzf() {
         return zzf;
     }
 
-    public void setZzf(long zzf) {
+    public void setZzf(Double zzf) {
         this.zzf = zzf;
     }
 
-    public long getYzf1() {
+    public Double getYzf1() {
         return Yzf1;
     }
 
-    public void setYzf1(long yzf1) {
+    public void setYzf1(Double yzf1) {
         Yzf1 = yzf1;
     }
 
-    public long getYzf3() {
+    public Double getYzf3() {
         return Yzf3;
     }
 
-    public void setYzf3(long yzf3) {
+    public void setYzf3(Double yzf3) {
         Yzf3 = yzf3;
     }
 
-    public long getYzf6() {
+    public Double getYzf6() {
         return Yzf6;
     }
 
-    public void setYzf6(long yzf6) {
+    public void setYzf6(Double yzf6) {
         Yzf6 = yzf6;
     }
 
-    public long getNzf1() {
+    public Double getNzf1() {
         return Nzf1;
     }
 
-    public void setNzf1(long nzf1) {
+    public void setNzf1(Double nzf1) {
         Nzf1 = nzf1;
     }
 
-    public long getNzf2() {
+    public Double getNzf2() {
         return Nzf2;
     }
 
-    public void setNzf2(long nzf2) {
+    public void setNzf2(Double nzf2) {
         Nzf2 = nzf2;
     }
 
-    public long getNzf3() {
+    public Double getNzf3() {
         return Nzf3;
     }
 
-    public void setNzf3(long nzf3) {
+    public void setNzf3(Double nzf3) {
         Nzf3 = nzf3;
     }
 
-    public long getJnzf() {
+    public Double getJnzf() {
         return jnzf;
     }
 
-    public void setJnzf(long jnzf) {
+    public void setJnzf(Double jnzf) {
         this.jnzf = jnzf;
     }
 
-    public long getLnzf() {
+    public Double getLnzf() {
         return lnzf;
     }
 
-    public void setLnzf(long lnzf) {
+    public void setLnzf(Double lnzf) {
         this.lnzf = lnzf;
     }
 
-    public long getQjzf() {
+    public Double getQjzf() {
         return qjzf;
     }
 
-    public void setQjzf(long qjzf) {
+    public void setQjzf(Double qjzf) {
         this.qjzf = qjzf;
     }
 
-    public long getSxf() {
+    public Double getSxf() {
         return sxf;
     }
 
-    public void setSxf(long sxf) {
+    public void setSxf(Double sxf) {
         this.sxf = sxf;
     }
 
-    public long getMd() {
+    public Long getMd() {
         return md;
     }
 
-    public void setMd(long md) {
+    public void setMd(Long md) {
         this.md = md;
+    }
+
+    public String getQc() {
+        return qc;
+    }
+
+    public void setQc(String qc) {
+        this.qc = qc;
     }
 }

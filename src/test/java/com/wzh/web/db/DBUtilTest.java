@@ -1,6 +1,9 @@
 package com.wzh.web.db;
 
+import com.wzh.web.po.Fund;
 import org.junit.jupiter.api.Test;
+
+import java.sql.Date;
 
 /**
  * @Author: wzh
@@ -16,5 +19,16 @@ class DBUtilTest {
     @Test
     void existJiTang() {
         System.out.println(DBUtil.existJiTang("123"));
+    }
+
+    @Test
+    void insertFund() {
+        Fund fund = new Fund();
+        fund.setCode(1111L);
+        fund.setDwjz(13.244);
+        fund.setLjjz(12.23123123);
+        fund.setJc("ceshi");
+        fund.setJzrq(new Date(1242414124124L));
+        System.out.println(DBUtil.insertFund(fund));
     }
 }

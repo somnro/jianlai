@@ -1,27 +1,23 @@
-CREATE TABLE `NewTable` (
-`id`  int(11) NOT NULL AUTO_INCREMENT COMMENT '数据ID' ,
-`code`  int(11) NOT NULL COMMENT '基金代码' ,
-`jc`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '基金简称' ,
-`jzrq`  date NOT NULL COMMENT '日期' ,
-`dwjz`  int(11) NULL DEFAULT NULL COMMENT '单位净值' ,
-`ljjz`  int(11) NULL DEFAULT NULL COMMENT '累计净值' ,
-`rzdf`  int(11) NULL DEFAULT NULL COMMENT '日增长率' ,
-`zzf`  int(11) NULL DEFAULT NULL COMMENT '近1周' ,
-`1yzf`  int(11) NULL DEFAULT NULL COMMENT '近1月' ,
-`3yzf`  int(11) NULL DEFAULT NULL COMMENT '近3月' ,
-`6yzf`  int(11) NULL DEFAULT NULL COMMENT '近6月' ,
-`1nzf`  int(11) NULL DEFAULT NULL COMMENT '近1年' ,
-`2nzf`  int(11) NULL DEFAULT NULL COMMENT '近2年' ,
-`3nzf`  int(11) NULL DEFAULT NULL COMMENT '近3年' ,
-`jnzf`  int(11) NULL DEFAULT NULL COMMENT '今年来' ,
-`lnzf`  int(11) NULL DEFAULT NULL COMMENT '成立来' ,
-`qjzf`  int(11) NULL DEFAULT NULL COMMENT '自定义' ,
-`sxf`  int(11) NULL DEFAULT NULL COMMENT '手续费' ,
-`md`  int(11) NULL DEFAULT 0 COMMENT '可购' ,
-PRIMARY KEY (`id`)
-)
-ENGINE=InnoDB
-DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
-AUTO_INCREMENT=1
-ROW_FORMAT=DYNAMIC
-;
+CREATE TABLE `test`.`fund`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '数据ID',
+  `code` int(11) NOT NULL COMMENT '基金代码',
+  `jc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '基金简称',
+  `jzrq` date NOT NULL COMMENT '日期',
+  `dwjz` double(11,5) NULL DEFAULT NULL COMMENT '单位净值',
+  `ljjz` double(11,5) NULL DEFAULT NULL COMMENT '累计净值',
+  `rzdf` double(11,5) NULL DEFAULT NULL COMMENT '日增长率',
+  `zzf` double(11,5) NULL DEFAULT NULL COMMENT '近1周',
+  `yzf1` double(11,5) NULL DEFAULT NULL COMMENT '近1月',
+  `yzf3` double(11,5) NULL DEFAULT NULL COMMENT '近3月',
+  `yzf6` double(11,5) NULL DEFAULT NULL COMMENT '近6月',
+  `nzf1` double(11,5) NULL DEFAULT NULL COMMENT '近1年',
+  `nzf2` double(11,5) NULL DEFAULT NULL COMMENT '近2年',
+  `nzf3` double(11,5) NULL DEFAULT NULL COMMENT '近3年',
+  `jnzf` double(11,5) NULL DEFAULT NULL COMMENT '今年来',
+  `lnzf` double(11,5) NULL DEFAULT NULL COMMENT '成立来',
+  `qjzf` double(11,5) NULL DEFAULT NULL COMMENT '自定义',
+  `sxf` double(11,5) NULL DEFAULT NULL COMMENT '手续费',
+  `md` int(11) NULL DEFAULT 0 COMMENT '可购',
+  `qc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '全称',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;

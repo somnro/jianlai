@@ -3,8 +3,11 @@ package com.wzh.web.db;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import com.wzh.web.constant.Constant;
+import com.wzh.web.po.Fund;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @Author: wzh
@@ -35,5 +38,14 @@ public class DBUtil {
             throwables.printStackTrace();
         }
         return flag;
+    }
+
+    public static int insertFund (Fund fund){
+        try {
+            return Db.use("group_test").insert(Entity.create("fund").parseBean(fund));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
     }
 }
