@@ -2,6 +2,7 @@ package com.wzh.web.db;
 
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
+import cn.hutool.json.JSONObject;
 import com.wzh.web.constant.Constant;
 import com.wzh.web.po.Fund;
 
@@ -47,5 +48,25 @@ public class DBUtil {
             throwables.printStackTrace();
         }
         return -1;
+    }
+    public static int insertFundInfo (JSONObject json){
+        try {
+            return Db.use("group_test").insert(Entity.create("fund_info")
+                    .set("code",json.getStr("code"))
+                    .set("name",json.getStr("name"))
+                    .set("archives",json.getStr("archives")));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            System.out.println("存入信息失败=" + json);
+        }
+        return -1;
+    }
+    public static Boolean findFundInfoByCode (String code){
+        try {
+            return Db.use("group_test").queryNumber("select count(1) from fund_info where code = ?",code).intValue()>0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 }

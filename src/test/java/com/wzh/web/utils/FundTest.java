@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONObject;
 import com.wzh.web.db.DBUtil;
 import com.wzh.web.po.Fund;
 import org.jsoup.nodes.Node;
@@ -91,6 +92,37 @@ public class FundTest {
         }
         System.out.println(1);
 
+    }
+
+    /**
+     * 所有基金按基金代码排序
+     */
+    @Test
+    public void test1351(){
+        String url = "http://fund.eastmoney.com/allfund.html";
+        ChromeDriver driver = initDriverWin();
+        driver.get(url);
+        new WebDriverWait(driver,1000*10);
+        String pageSource = driver.getPageSource();
+        JXDocument jxDocument = JXDocument.create(pageSource);
+        List<JXNode> jxNodes = jxDocument.selN("//ul[@class='num_right']/li");
+        for (JXNode jxNode : jxNodes) {
+            List<Node> nodes = jxNode.asElement().childNodes();
+            if (nodes.size()==0){continue;}
+            List<Node> nodeList = nodes.get(0).childNodes();
+            String name = nodeList.get(0).childNode(0).toString();
+            String[] split = name.split("）");
+            String fundCode = split[0].replace("（", "");
+            String fundName = split[1];
+            String archives = nodeList.get(4).attr("href");
+            JSONObject jsonObject = new JSONObject().put("code", fundCode).put("name", fundName).put("archives", archives);
+            if (DBUtil.findFundInfoByCode(jsonObject.getStr("code"))){
+                System.out.println("信息已存在 = " +jsonObject.toString());
+            }else {
+                DBUtil.insertFundInfo(jsonObject);
+            }
+        }
+        driver.close();
     }
 
     /**
@@ -250,6 +282,17 @@ public class FundTest {
         System.setProperty("webdriver.chrome.driver", "/Users/somnr/Desktop/develop/chromeDriver/chromedriver");
         //取消信息显示：[1589963848.022][SEVERE]: Timed out receiving message from renderer: 0.100
         System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+        ChromeDriver driver = new ChromeDriver(chromeOptions);
+        return driver;
+    }
+
+    public static ChromeDriver initDriverWin(){
+        ChromeOptions chromeOptions = new ChromeOptions();
+        //去掉提示
+        chromeOptions.setExperimentalOption("useAutomationExtension", false);
+        chromeOptions.setExperimentalOption("excludeSwitches",Collections.singletonList("enable-automation"));
+//        //开启F12模式
+//        chromeOptions.addArguments("--auto-open-devtools-for-tabs");
         ChromeDriver driver = new ChromeDriver(chromeOptions);
         return driver;
     }
