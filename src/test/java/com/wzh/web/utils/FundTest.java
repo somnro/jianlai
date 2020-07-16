@@ -4,9 +4,12 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.db.DbUtil;
+import cn.hutool.db.Entity;
 import cn.hutool.json.JSONObject;
 import com.wzh.web.db.DBUtil;
 import com.wzh.web.po.Fund;
+import com.wzh.web.po.FundAll;
 import org.jsoup.nodes.Node;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,6 +21,7 @@ import org.seimicrawler.xpath.JXNode;
 
 import java.nio.charset.Charset;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -27,10 +31,9 @@ import java.util.*;
 public class FundTest {
 
 
-
     @Test
     public void test1341() {
-        String s = FileUtil.readString(System.getProperty("user.dir")+"/src/main/resources/1594654553962.html", Charset.defaultCharset());
+        String s = FileUtil.readString(System.getProperty("user.dir") + "/src/main/resources/1594654553962.html", Charset.defaultCharset());
         JXDocument jxDocument = JXDocument.create(s);
         List<JXNode> jxNodes = jxDocument.selN("//tbody");
         JXNode jxNode = jxNodes.get(3);
@@ -49,8 +52,8 @@ public class FundTest {
             fund.setQc(nodeList.get(3).childNode(0).attr("title"));
             //日期
             try {
-                fund.setJzrq(new Date(DateUtil.parseDate("2020-"+nodeList.get(4).childNode(0).toString()).getTime()));
-            }catch (Exception e){
+                fund.setJzrq(new Date(DateUtil.parseDate("2020-" + nodeList.get(4).childNode(0).toString()).getTime()));
+            } catch (Exception e) {
                 fund.setJzrq(new Date(DateUtil.date().getTime()));
             }
             //单位净值
@@ -82,7 +85,7 @@ public class FundTest {
             //手续费
             try {
                 fund.setSxf(stringToDouble(nodeList.get(18).childNode(0).childNode(0).toString()));
-            }catch (Exception e){
+            } catch (Exception e) {
             }
             //可购
             fund.setMd(1L);
@@ -98,17 +101,19 @@ public class FundTest {
      * 所有基金按基金代码排序
      */
     @Test
-    public void test1351(){
+    public void test1351() {
         String url = "http://fund.eastmoney.com/allfund.html";
         ChromeDriver driver = initDriverWin();
         driver.get(url);
-        new WebDriverWait(driver,1000*10);
+        new WebDriverWait(driver, 1000 * 10);
         String pageSource = driver.getPageSource();
         JXDocument jxDocument = JXDocument.create(pageSource);
         List<JXNode> jxNodes = jxDocument.selN("//ul[@class='num_right']/li");
         for (JXNode jxNode : jxNodes) {
             List<Node> nodes = jxNode.asElement().childNodes();
-            if (nodes.size()==0){continue;}
+            if (nodes.size() == 0) {
+                continue;
+            }
             List<Node> nodeList = nodes.get(0).childNodes();
             String name = nodeList.get(0).childNode(0).toString();
             String[] split = name.split("）");
@@ -116,10 +121,56 @@ public class FundTest {
             String fundName = split[1];
             String archives = nodeList.get(4).attr("href");
             JSONObject jsonObject = new JSONObject().put("code", fundCode).put("name", fundName).put("archives", archives);
-            if (DBUtil.findFundInfoByCode(jsonObject.getStr("code"))){
-                System.out.println("信息已存在 = " +jsonObject.toString());
-            }else {
+            if (DBUtil.findFundInfoByCode(jsonObject.getStr("code"))) {
+                System.out.println("信息已存在 = " + jsonObject.toString());
+            } else {
                 DBUtil.insertFundInfo(jsonObject);
+            }
+        }
+        driver.close();
+    }
+
+    /**
+     * http://fund.eastmoney.com/000001.html
+     */
+    @Test
+    public void test1031() throws InterruptedException {
+        String url = "http://fund.eastmoney.com/666.html";
+        List<Entity> fundInfo = DBUtil.findFundInfo();
+        ChromeDriver driver = initDriverWin();
+        for (Entity entity : fundInfo) {
+            String code = entity.getStr("code");
+            String name = entity.getStr("name");
+            String newUrl = url.replace("666", code);
+            driver.get(newUrl);
+            new WebDriverWait(driver, 1000 * 5);
+            Thread.sleep(1000 * 1);
+            String pageSource = driver.getPageSource();
+            JXDocument jxDocument = JXDocument.create(pageSource);
+            List<Node> jxNodes = jxDocument.selN("//*[@id='Li1']/div[1]/table[@class='ui-table-hover']/tbody").get(0).asElement().childNodes();
+            if (jxNodes.size() < 2) {
+                System.out.println("当前无数据 = " + code);
+                continue;
+            }
+            for (int i = 0; i < jxNodes.size(); i++) {
+                if (i == 0) {
+                    continue;
+                }
+                List<Node> nodes = jxNodes.get(i).childNodes();
+                String rq = nodes.get(1).childNode(0).toString();
+                double dwjz = Double.valueOf(nodes.get(3).childNode(0).toString());
+                double ljjz = Double.valueOf(nodes.get(5).childNode(0).toString());
+                String rzdfStr = nodes.get(7).childNode(0).childNode(0).toString();
+                Double rzdf = Double.valueOf(rzdfStr.replace("%", ""));
+                FundAll fundAll = new FundAll();
+                fundAll.setCode(code);
+                fundAll.setName(name);
+                fundAll.setDwjz(dwjz);
+                fundAll.setLjjz(ljjz);
+                fundAll.setRzdf(rzdf);
+                fundAll.setRq(new Date(DateUtil.parseDate("2020-" + rq).getTime()));
+                fundAll.setCreate(new Timestamp(new DateTime().getTime()));
+                DBUtil.insertFund_All(fundAll);
             }
         }
         driver.close();
@@ -146,7 +197,7 @@ public class FundTest {
      * os.arch:amd64
      * java.io.tmpdir:C:\Users\dell0\AppData\Local\Temp\
      * line.separator:
-     *
+     * <p>
      * java.vm.specification.vendor:Oracle Corporation
      * user.variant:
      * os.name:Windows 10
@@ -182,7 +233,7 @@ public class FundTest {
      * sun.cpu.endian:little
      * sun.desktop:windows
      * sun.cpu.isalist:amd64
-     *
+     * <p>
      * ————————Mac————————
      * gopherProxySet:false
      * awt.toolkit:sun.lwawt.macosx.LWCToolkit
@@ -211,7 +262,7 @@ public class FundTest {
      * file.separator:/
      * java.vm.compressedOopsMode:Zero based
      * line.separator:
-     *
+     * <p>
      * java.specification.name:Java Platform API Specification
      * java.vm.specification.vendor:Oracle Corporation
      * java.awt.graphicsenv:sun.awt.CGraphicsEnvironment
@@ -245,34 +296,35 @@ public class FundTest {
         Properties properties = System.getProperties();
         Set<Map.Entry<Object, Object>> entries = properties.entrySet();
         for (Map.Entry<Object, Object> entry : entries) {
-            System.out.println(entry.getKey()+":"+entry.getValue());
+            System.out.println(entry.getKey() + ":" + entry.getValue());
         }
     }
-    private Double stringToDouble(String s){
-        s = s.replace("-","");
-        if (StrUtil.isBlank(s)){
+
+    private Double stringToDouble(String s) {
+        s = s.replace("-", "");
+        if (StrUtil.isBlank(s)) {
             return 0d;
         }
-        s = s.replace("%","");
+        s = s.replace("%", "");
         try {
             return Double.valueOf(s);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return 0d;
     }
 
     @Test
-    public void test1009(){
+    public void test1009() {
         ChromeDriver driver = initDriverMac();
         driver.get("http://www.2345.com");
-        new WebDriverWait(driver,1000*3);
+        new WebDriverWait(driver, 1000 * 3);
         System.out.println("1 = " + 1);
 
     }
 
 
-    public static ChromeDriver initDriverMac(){
+    public static ChromeDriver initDriverMac() {
         ChromeOptions chromeOptions = new ChromeOptions();
         //设置代理,请先验证代理是否有效
         //去掉提示
@@ -286,11 +338,11 @@ public class FundTest {
         return driver;
     }
 
-    public static ChromeDriver initDriverWin(){
+    public static ChromeDriver initDriverWin() {
         ChromeOptions chromeOptions = new ChromeOptions();
         //去掉提示
         chromeOptions.setExperimentalOption("useAutomationExtension", false);
-        chromeOptions.setExperimentalOption("excludeSwitches",Collections.singletonList("enable-automation"));
+        chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 //        //开启F12模式
 //        chromeOptions.addArguments("--auto-open-devtools-for-tabs");
         ChromeDriver driver = new ChromeDriver(chromeOptions);

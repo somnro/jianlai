@@ -5,10 +5,12 @@ import cn.hutool.db.Entity;
 import cn.hutool.json.JSONObject;
 import com.wzh.web.constant.Constant;
 import com.wzh.web.po.Fund;
+import com.wzh.web.po.FundAll;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @Author: wzh
@@ -68,5 +70,24 @@ public class DBUtil {
             throwables.printStackTrace();
         }
         return false;
+    }
+    public static List<Entity> findFundInfo(){
+        List<Entity> all = new ArrayList<>();
+        try {
+            all = Db.use("group_test").findAll("fund_info");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return all;
+    }
+
+    public static int insertFund_All (FundAll fundAll){
+        try {
+            return Db.use("group_test").insert(Entity.create("fund_all").parseBean(fundAll));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            System.out.println("数据库存入失败 = " + fundAll.toString());
+        }
+        return -1;
     }
 }
