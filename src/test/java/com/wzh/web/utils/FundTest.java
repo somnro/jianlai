@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.seimicrawler.xpath.JXDocument;
 import org.seimicrawler.xpath.JXNode;
 
+import java.io.File;
 import java.nio.charset.Charset;
 import java.sql.Date;
 import java.util.*;
@@ -25,11 +26,24 @@ import java.util.*;
  **/
 public class FundTest {
 
+    @Test
+    public void test2351(){
+        String url = "http://fund.eastmoney.com/data/fundranking.html#tall;c0;r;szzf;pn10000;ddesc;qsd20190712;qed20200712;qdii;zq;gg;gzbd;gzfs;bbzt;sfbb";
+        ChromeDriver driver = initDriverMac();
+        driver.get(url);
+        new WebDriverWait(driver,1000*30);
+        String pageSource = driver.getPageSource();
+        String rootPath = System.getProperty("user.dir");
+        File file = new File(rootPath + "/" + DateUtil.date() + ".html");
+        FileUtil.writeUtf8String(pageSource,file);
+        driver.close();
+    }
+
 
 
     @Test
     public void test1341() {
-        String s = FileUtil.readString(System.getProperty("user.dir")+"/src/main/resources/1594654553962.html", Charset.defaultCharset());
+        String s = FileUtil.readString(System.getProperty("user.dir")+"/1594742095215.html", Charset.defaultCharset());
         JXDocument jxDocument = JXDocument.create(s);
         List<JXNode> jxNodes = jxDocument.selN("//tbody");
         JXNode jxNode = jxNodes.get(3);

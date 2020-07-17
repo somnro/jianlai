@@ -48,4 +48,8 @@ public class DBUtil {
         }
         return -1;
     }
+
+    public static void getFund(){
+//        Db.use("group_test").query("")
+    }
 }
