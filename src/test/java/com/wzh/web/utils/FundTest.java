@@ -34,12 +34,17 @@ public class FundTest {
     @Test
     public void test2351(){
         String url = "http://fund.eastmoney.com/data/fundranking.html#tall;c0;r;szzf;pn10000;ddesc;qsd20190712;qed20200712;qdii;zq;gg;gzbd;gzfs;bbzt;sfbb";
-        ChromeDriver driver = initDriverMac();
+        ChromeDriver driver;
+        if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
+            driver = initDriverMac();
+        }else {
+            driver = initDriverWin();
+        }
         driver.get(url);
         new WebDriverWait(driver,1000*30);
         String pageSource = driver.getPageSource();
         String rootPath = System.getProperty("user.dir");
-        File file = new File(rootPath + "/" + DateUtil.date() + ".html");
+        File file = new File(rootPath + "/src/main/resources/" + DateUtil.date() + ".html");
         FileUtil.writeUtf8String(pageSource,file);
         driver.close();
     }
