@@ -2,7 +2,7 @@ CREATE TABLE `NewTable` (
 `id`  int(11) NOT NULL AUTO_INCREMENT ,
 `code`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 `name`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
-`fwjz`  double(11,5) NOT NULL ,
+`dwjz`  double(11,5) NOT NULL ,
 `ljjz`  double(11,5) NULL DEFAULT NULL ,
 `rzdf`  double(11,5) NULL DEFAULT NULL ,
 `rq`  date NOT NULL ,
