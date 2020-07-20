@@ -31,6 +31,9 @@ import java.util.*;
  **/
 public class FundTest {
 
+    /**
+     * 采集--开放基金排行、可购
+     */
     @Test
     public void test2351(){
         String url = "http://fund.eastmoney.com/data/fundranking.html#tall;c0;r;szzf;pn10000;ddesc;qsd20190712;qed20200712;qdii;zq;gg;gzbd;gzfs;bbzt;sfbb";
@@ -44,15 +47,18 @@ public class FundTest {
         new WebDriverWait(driver,1000*30);
         String pageSource = driver.getPageSource();
         String rootPath = System.getProperty("user.dir");
-        File file = new File(rootPath + "/src/main/resources/" + DateUtil.date() + ".html");
+        File file = new File(rootPath + "/src/main/resources/" + System.currentTimeMillis() + ".html");
         FileUtil.writeUtf8String(pageSource,file);
         driver.close();
     }
 
 
+    /**
+     * 解析--开放基金排行数据存到mysql
+     */
     @Test
     public void test1341() {
-        String s = FileUtil.readString(System.getProperty("user.dir") + "/src/main/resources/1594654553962.html", Charset.defaultCharset());
+        String s = FileUtil.readString(System.getProperty("user.dir") + "/src/main/resources/1595236595592.html", Charset.defaultCharset());
         JXDocument jxDocument = JXDocument.create(s);
         List<JXNode> jxNodes = jxDocument.selN("//tbody");
         JXNode jxNode = jxNodes.get(3);
