@@ -7,6 +7,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.db.DbUtil;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.wzh.web.db.DBUtil;
 import com.wzh.web.po.Fund;
 import com.wzh.web.po.FundAll;
@@ -75,7 +76,7 @@ public class FundTest {
             Fund fund = new Fund();
             fund.setCreate(new Date(time));
             //基金代码
-            fund.setCode(Long.valueOf(nodeList.get(2).childNode(0).childNode(0).toString()));
+            fund.setCode(nodeList.get(2).childNode(0).childNode(0).toString());
             //基金简称
             fund.setJc(nodeList.get(3).childNode(0).childNode(0).toString());
             //全称
@@ -209,19 +210,33 @@ public class FundTest {
     @Test
     public void test2212() throws InterruptedException {
         String url = "http://fund.eastmoney.com/666.html";
-        String code = "164402";
-        String name = "164402";
-        String newUrl = url.replace("666",code);
+
         ChromeDriver driver = getChromeDriver();
-        driver.get(newUrl);
+        String s = FileUtil.readUtf8String(System.getProperty("user.dir") + "/src/main/resources/db/临时文件.txt");
+        JSONObject jsonObject = JSONUtil.parseObj(s);
+        Set<Map.Entry<String, Object>> entries = jsonObject.entrySet();
+        for (Map.Entry<String, Object> entry : entries) {
+            String code = entry.getKey();
+            String name = entry.getValue().toString();
+            String newUrl = url.replace("666", code);
+            driver.get(newUrl);
             new WebDriverWait(driver, 1000 * 5);
             Thread.sleep(1000 * 1);
             String pageSource = driver.getPageSource();
             JXDocument jxDocument = JXDocument.create(pageSource);
-            List<Node> jxNodes = jxDocument.selN("//*[@id='Li1']/div[1]/table[@class='ui-table-hover']/tbody").get(0).asElement().childNodes();
-            if (jxNodes.size() < 2) {
+            List<Node> jxNodes = null;
+            try {
+                jxNodes = jxDocument.selN("//*[@id='Li1']/div[1]/table[@class='ui-table-hover']/tbody").get(0).asElement().childNodes();
+            }catch (Exception e){
+                e.printStackTrace();
                 System.out.println("当前无数据 = " + code);
-
+                continue;
+            }
+            if (jxNodes==null || jxNodes.size() < 2) {
+                System.out.println("当前无数据 = " + code);
+                continue;
+            }else {
+                System.out.println("当前数据 = " + code);
             }
             for (int i = 0; i < jxNodes.size(); i++) {
                 if (i == 0) {
@@ -243,6 +258,7 @@ public class FundTest {
                 fundAll.setCreate(new Timestamp(new DateTime().getTime()));
                 DBUtil.insertFund_All(fundAll);
             }
+        }
 
         driver.close();
     }

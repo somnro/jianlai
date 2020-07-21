@@ -9,7 +9,7 @@ import java.sql.Date;
 public class Fund {
 
     private Long id;
-    private Long code;
+    private String code;
     private String jc;
     private java.sql.Date jzrq;
     private Double dwjz;
@@ -47,11 +47,11 @@ public class Fund {
         this.id = id;
     }
 
-    public Long getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(Long code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

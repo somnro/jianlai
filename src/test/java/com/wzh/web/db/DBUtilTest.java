@@ -24,7 +24,7 @@ class DBUtilTest {
     @Test
     void insertFund() {
         Fund fund = new Fund();
-        fund.setCode(1111L);
+        fund.setCode("1111");
         fund.setDwjz(13.244);
         fund.setLjjz(12.23123123);
         fund.setJc("ceshi");

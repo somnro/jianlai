@@ -1,6 +1,6 @@
-CREATE TABLE `test`.`无标题`  (
+CREATE TABLE `test`.`fund`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '数据ID',
-  `code` int(11) NOT NULL COMMENT '基金代码',
+  `code` varchar(255) NOT NULL COMMENT '基金代码',
   `jc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '基金简称',
   `jzrq` date NOT NULL COMMENT '日期',
   `dwjz` double(11, 5) NULL DEFAULT NULL COMMENT '单位净值',
