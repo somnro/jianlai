@@ -1,4 +1,4 @@
-CREATE TABLE `NewTable` (
+CREATE TABLE `fund_all` (
 `id`  int(11) NOT NULL AUTO_INCREMENT ,
 `code`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 `name`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,

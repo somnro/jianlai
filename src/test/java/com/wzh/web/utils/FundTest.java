@@ -34,12 +34,7 @@ public class FundTest {
     @Test
     public void test2351(){
         String url = "http://fund.eastmoney.com/data/fundranking.html#tall;c0;r;szzf;pn10000;ddesc;qsd20190712;qed20200712;qdii;zq;gg;gzbd;gzfs;bbzt;sfbb";
-        ChromeDriver driver;
-        if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
-            driver = initDriverMac();
-        }else {
-            driver = initDriverWin();
-        }
+        ChromeDriver driver = getChromeDriver();
         driver.get(url);
         new WebDriverWait(driver,1000*30);
         String pageSource = driver.getPageSource();
@@ -47,6 +42,16 @@ public class FundTest {
         File file = new File(rootPath + "/src/main/resources/" + DateUtil.date() + ".html");
         FileUtil.writeUtf8String(pageSource,file);
         driver.close();
+    }
+
+    private ChromeDriver getChromeDriver() {
+        ChromeDriver driver;
+        if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
+            driver = initDriverMac();
+        }else {
+            driver = initDriverWin();
+        }
+        return driver;
     }
 
 
@@ -192,6 +197,47 @@ public class FundTest {
                 DBUtil.insertFund_All(fundAll);
             }
         }
+        driver.close();
+    }
+
+    @Test
+    public void test2212() throws InterruptedException {
+        String url = "http://fund.eastmoney.com/666.html";
+        String code = "164402";
+        String name = "164402";
+        String newUrl = url.replace("666",code);
+        ChromeDriver driver = getChromeDriver();
+        driver.get(newUrl);
+            new WebDriverWait(driver, 1000 * 5);
+            Thread.sleep(1000 * 1);
+            String pageSource = driver.getPageSource();
+            JXDocument jxDocument = JXDocument.create(pageSource);
+            List<Node> jxNodes = jxDocument.selN("//*[@id='Li1']/div[1]/table[@class='ui-table-hover']/tbody").get(0).asElement().childNodes();
+            if (jxNodes.size() < 2) {
+                System.out.println("当前无数据 = " + code);
+
+            }
+            for (int i = 0; i < jxNodes.size(); i++) {
+                if (i == 0) {
+                    continue;
+                }
+                List<Node> nodes = jxNodes.get(i).childNodes();
+                String rq = nodes.get(1).childNode(0).toString();
+                double dwjz = Double.valueOf(nodes.get(3).childNode(0).toString());
+                double ljjz = Double.valueOf(nodes.get(5).childNode(0).toString());
+                String rzdfStr = nodes.get(7).childNode(0).childNode(0).toString();
+                Double rzdf = Double.valueOf(rzdfStr.replace("%", ""));
+                FundAll fundAll = new FundAll();
+                fundAll.setCode(code);
+                fundAll.setName(name);
+                fundAll.setDwjz(dwjz);
+                fundAll.setLjjz(ljjz);
+                fundAll.setRzdf(rzdf);
+                fundAll.setRq(new Date(DateUtil.parseDate("2020-" + rq).getTime()));
+                fundAll.setCreate(new Timestamp(new DateTime().getTime()));
+                DBUtil.insertFund_All(fundAll);
+            }
+
         driver.close();
     }
 
