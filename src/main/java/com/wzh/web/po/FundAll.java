@@ -86,4 +86,18 @@ public class FundAll {
     public void setCreate(java.sql.Timestamp create) {
         this.create = create;
     }
+
+    @Override
+    public String toString() {
+        return "FundAll{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", dwjz=" + dwjz +
+                ", ljjz=" + ljjz +
+                ", rzdf=" + rzdf +
+                ", rq=" + rq +
+                ", create=" + create +
+                '}';
+    }
 }

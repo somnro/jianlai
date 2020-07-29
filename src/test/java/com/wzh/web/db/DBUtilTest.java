@@ -31,4 +31,9 @@ class DBUtilTest {
         fund.setJzrq(new Date(1242414124124L));
         System.out.println(DBUtil.insertFund(fund));
     }
+
+    @Test
+    void findFundAllByCodeAndRq() {
+        System.out.println(DBUtil.findFundAllByCodeAndRq("006282","2020-07-09"));
+    }
 }

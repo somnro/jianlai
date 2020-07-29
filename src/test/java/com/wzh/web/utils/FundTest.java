@@ -19,18 +19,23 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.seimicrawler.xpath.JXDocument;
 import org.seimicrawler.xpath.JXNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.nio.charset.Charset;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @Author: wzh
  * @Date: 2020/7/10 16:21
  **/
 public class FundTest {
+    private static final Logger LOG = LoggerFactory.getLogger(FundTest.class);
+
 
     /**
      * 采集--开放基金排行、可购
@@ -153,7 +158,7 @@ public class FundTest {
             String archives = nodeList.get(4).attr("href");
             JSONObject jsonObject = new JSONObject().put("code", fundCode).put("name", fundName).put("archives", archives);
             if (DBUtil.findFundInfoByCode(jsonObject.getStr("code"))) {
-                System.out.println("信息已存在 = " + jsonObject.toString());
+                LOG.info("信息已存在 = " + jsonObject.toString());
             } else {
                 DBUtil.insertFundInfo(jsonObject);
             }
@@ -180,7 +185,7 @@ public class FundTest {
             JXDocument jxDocument = JXDocument.create(pageSource);
             List<Node> jxNodes = jxDocument.selN("//*[@id='Li1']/div[1]/table[@class='ui-table-hover']/tbody").get(0).asElement().childNodes();
             if (jxNodes.size() < 2) {
-                System.out.println("当前无数据 = " + code);
+                LOG.info("当前无数据 = " + code);
                 continue;
             }
             for (int i = 0; i < jxNodes.size(); i++) {
@@ -212,12 +217,14 @@ public class FundTest {
         String url = "http://fund.eastmoney.com/666.html";
 
         ChromeDriver driver = getChromeDriver();
-        String s = FileUtil.readUtf8String(System.getProperty("user.dir") + "/src/main/resources/db/临时文件.txt");
-        JSONObject jsonObject = JSONUtil.parseObj(s);
-        Set<Map.Entry<String, Object>> entries = jsonObject.entrySet();
-        for (Map.Entry<String, Object> entry : entries) {
-            String code = entry.getKey();
-            String name = entry.getValue().toString();
+        List<String> lines = FileUtil.readUtf8Lines(System.getProperty("user.dir") + "/src/main/resources/db/临时文件.txt");
+        for (String line : lines) {
+            String[] strings = line.split(":");
+            String code = strings[0];
+            if (Integer.valueOf(code)>485022){
+                continue;
+            }
+            String name = strings[1];
             String newUrl = url.replace("666", code);
             driver.get(newUrl);
             new WebDriverWait(driver, 1000 * 5);
@@ -229,14 +236,14 @@ public class FundTest {
                 jxNodes = jxDocument.selN("//*[@id='Li1']/div[1]/table[@class='ui-table-hover']/tbody").get(0).asElement().childNodes();
             }catch (Exception e){
                 e.printStackTrace();
-                System.out.println("当前无数据 = " + code);
+                LOG.info("当前无数据 = " + code);
                 continue;
             }
             if (jxNodes==null || jxNodes.size() < 2) {
-                System.out.println("当前无数据 = " + code);
+                LOG.info("当前无数据 = " + code);
                 continue;
             }else {
-                System.out.println("当前数据 = " + code);
+                LOG.info("当前数据 = " + code);
             }
             for (int i = 0; i < jxNodes.size(); i++) {
                 if (i == 0) {
@@ -244,10 +251,21 @@ public class FundTest {
                 }
                 List<Node> nodes = jxNodes.get(i).childNodes();
                 String rq = nodes.get(1).childNode(0).toString();
+                if (rq.startsWith("暂无数据")){
+                    break;
+                }
                 double dwjz = Double.valueOf(nodes.get(3).childNode(0).toString());
-                double ljjz = Double.valueOf(nodes.get(5).childNode(0).toString());
+                double ljjz = 0.0;
+                String tempLjjz = nodes.get(5).childNode(0).toString().replace("-", "");
+                if (StrUtil.isNotBlank(tempLjjz)){
+                    ljjz = Double.valueOf(tempLjjz);
+                }
                 String rzdfStr = nodes.get(7).childNode(0).childNode(0).toString();
-                Double rzdf = Double.valueOf(rzdfStr.replace("%", ""));
+                Double rzdf = 0.0;
+                String tempRzdf = rzdfStr.replace("%", "").replace("-", "");
+                if (StrUtil.isNotBlank(tempRzdf)){
+                    rzdf = Double.valueOf(tempRzdf);
+                }
                 FundAll fundAll = new FundAll();
                 fundAll.setCode(code);
                 fundAll.setName(name);
@@ -256,7 +274,11 @@ public class FundTest {
                 fundAll.setRzdf(rzdf);
                 fundAll.setRq(new Date(DateUtil.parseDate("2020-" + rq).getTime()));
                 fundAll.setCreate(new Timestamp(new DateTime().getTime()));
-                DBUtil.insertFund_All(fundAll);
+                if (DBUtil.findFundAllByCodeAndRq(code,"2020-"+rq)){
+                    LOG.info("数据已存在 = " + fundAll.toString());
+                }else {
+                    DBUtil.insertFund_All(fundAll);
+                }
             }
         }
 
@@ -383,7 +405,7 @@ public class FundTest {
         Properties properties = System.getProperties();
         Set<Map.Entry<Object, Object>> entries = properties.entrySet();
         for (Map.Entry<Object, Object> entry : entries) {
-            System.out.println(entry.getKey() + ":" + entry.getValue());
+            LOG.info(entry.getKey() + ":" + entry.getValue());
         }
     }
 

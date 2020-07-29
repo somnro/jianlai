@@ -90,6 +90,14 @@ public class DBUtil {
         }
         return -1;
     }
+    public static Boolean findFundAllByCodeAndRq (String code,String rq){
+        try {
+            return Db.use("group_test").queryNumber("select count(1) from fund_all where code = ? and rq=?",code,rq).intValue()>0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return true;
+    }
 
     public static void getFund(){
 //        Db.use("group_test").query("")
